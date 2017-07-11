@@ -1,0 +1,105 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <ul id="source">
+    <li>北京空气质量：<b>90</b></li>
+    <li>上海空气质量：<b>70</b></li>
+    <li>天津空气质量：<b>80</b></li>
+    <li>广州空气质量：<b>50</b></li>
+    <li>深圳空气质量：<b>40</b></li>
+    <li>福州空气质量：<b>32</b></li>
+    <li>成都空气质量：<b>90</b></li>
+  </ul>
+
+  <ul id="resort">
+    <!-- 
+    <li>第一名：北京空气质量：<b>90</b></li>
+    <li>第二名：北京空气质量：<b>90</b></li>
+    <li>第三名：北京空气质量：<b>90</b></li>
+     -->
+
+  </ul>
+
+  <button id="sort-btn">排序</button>
+
+<script type="text/javascript">
+ var s="";
+/**
+ * getData方法
+ * 读取id为source的列表，获取其中城市名字及城市对应的空气质量
+ * 返回一个数组，格式见函数中示例
+ */
+function getData() {
+  var lis=document.getElementsByTagName("li");
+  var data=[];
+   for(var i=0;i<lis.length;i++){
+    var s=[];
+   var s1= lis[i].innerHTML.substring(0,6);
+   var re=/\D+/g;
+   var s2=lis[i].innerHTML.replace(re , "");
+   s[0]=s1;
+   s[1]=s2;
+    data.push(s);
+   }
+  return data;
+}
+
+/**
+ * sortAqiData
+ * 按空气质量对data进行从小到大的排序
+ * 返回一个排序后的数组
+ */
+function sortAqiData(data) {
+ for(var i=0;i<data.length;i++){
+  for(var j=i+1;j<data.length;j++){   
+    if(data[i][1]>data[j][1])    
+    { var f= data[i];
+       data[i]=data[j];
+        data[j]=f;
+    }
+
+  }
+ }
+ return data;
+}
+
+/**
+ * render
+ * 将排好序的城市及空气质量指数，输出显示到id位resort的列表中
+ * 格式见ul中的注释的部分
+ */
+function render(data) {
+  var resort=document.getElementById("resort");
+var k=["一","二","三","四","五","六","七"];
+
+ var num=0;
+for(var i=0;i<data.length;i++){
+ s+="<li>"+"第"+k[i]+"名"+data[i][0]+","+"<b>"+data[i][1]+"</b></li>";
+num++;
+}
+ resort.innerHTML=s;
+ return s;
+}
+优雅走过第三春听董老师讲女人更年期那些事儿
+function btnHandle() {
+  var aqiData = getData();
+/*  for(var i=0;i<aqiData.length;i++){console.log(aqiData[i]);}*/
+  
+  aqiData = sortAqiData(aqiData);
+  for(var i=0;i<aqiData.length;i++){console.log(aqiData[i]);}
+  render(aqiData);
+ 
+}
+function init() {
+ var sortbtn=document.getElementById("sort-btn");
+sortbtn.onclick=btnHandle;
+}
+init();
+</script>
+</body>
+</html>

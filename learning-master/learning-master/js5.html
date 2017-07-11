@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百度excel4</title>
+    <style type="text/css">
+        button{
+            background: transparent;
+            border-radius: 3px;
+            border: none;
+            border: 1px solid gray;
+        }
+        .right_in{
+
+          margin-right: 20px;
+        }
+        .bot{
+            font-size: 11px;
+            margin-top: 10px;
+            width: auto;
+            padding: 5px;
+            height: 10px;
+            text-align: center;
+            color: white;
+            background: red;
+            vertical-align: bottom;
+            display: inline-block;
+            margin-right: 5px;
+        }
+    </style>
+    <script >
+        window.onload=function () {
+
+            var text_in=document.getElementsByClassName("in_text")[0];
+            var bt=document.getElementsByClassName("bottom")[0];
+            var left_in=document.getElementsByClassName("left_in")[0];
+            var right_in=document.getElementsByClassName("right_in")[0];
+            var left_out=document.getElementsByClassName("left_out")[0];
+            var right_out=document.getElementsByClassName("right_out")[0];
+            var btn_sort=document.getElementsByClassName("sort")[0];
+            text_in.onblur=function () {
+                if( text_in.value =="") {
+                   alert("请输入值");
+                }
+                else if(isNaN(text_in.value))
+                {
+                    alert("请输入数字");
+                }
+                 else if(Number(text_in.value)<10||Number(text_in.value)>100){
+                    alert("请输入10到100之间的数字");
+                    console.log(Number(text_in.value));
+                    text_in.value="";
+                }
+
+            };
+            text_in.onfocus=function () {
+                text_in.value="";
+            };
+             function createNod(val) {
+                 var div=document.createElement("div");
+                 div.innerHTML=text_in.value;
+                 div.className="bot";
+
+                 div.style.height=val+"px";
+                 div.style.lineHeight=val+"px";
+                 return div;
+             };
+            left_in.onclick=function ( ) {
+                bt.insertBefore( createNod(Number(text_in.value)), bt.firstChild);
+            };
+            right_in.onclick=function () {
+                bt.appendChild(createNod(Number(text_in.value)));
+            };
+            right_out.onclick=function () {
+                var last_child=bt.lastElementChild;
+                if(last_child){
+                bt.removeChild(last_child);
+            }
+            else{
+                return;}
+            };
+            left_out.onclick=function () {
+                var first_child=bt.firstChild;
+                if(first_child){
+                    bt.removeChild(first_child);
+                }
+                else{
+                    return;
+                }
+            }
+            bt.onclick=function (event) {
+                var ev=event || window.event;
+               alert("确认要删除"+ev.target.innerHTML+"吗");
+                bt.removeChild(ev.target);
+            }
+            btn_sort.onclick=function () {
+                var nu_sort=function (a,b) {
+
+                   var first= Number(bt.children[a].innerHTML);
+                   var second= Number(bt.children[b].innerHTML);
+                    if(first>second){
+                        var k=bt.children[a].innerHTML;
+                        bt.children[a].innerHTML=bt.children[b].innerHTML;
+                        bt.children[b].innerHTML=k;
+                        var f=bt.children[a].style.height;
+                        bt.children[a].style.height=bt.children[b].style.height;
+                       bt.children[b].style.height=f;
+
+                        /*  bt.removeChild(bt.children[b]);
+                        bt.insertBefore(f,bt.children[a]);*/
+                    }
+                    else{
+                        return ;
+                    }
+                }
+              /*  function  show() {
+                    for(var a=0;a<bt.children.length-1;a++){
+                        var s= Number(bt.children[a].innerHTML);
+                        bt.children[a].style.height=s+"px";
+                    }
+                }*/
+            /*   console.log(bt.children[0]);*/
+            for(var i=0;i<bt.children.length;i++){
+               for(var a=0;a<(bt.children.length-1-i);a++){
+                  nu_sort(a,a+1);
+                   bt.children[i].style.lineHeight= bt.children[i].innerHTML+"px";
+              /*    show();*/
+
+               }}
+
+            }
+
+        }
+    </script>
+</head>
+<body>
+<div class="top">
+    <!--autofocus当页面加载时获得焦点：-->
+<input type="text" class="in_text"  autofocus="autofocus"/>
+
+<button class="left_in">左侧入</button>
+<button class="right_in">右测入</button>
+<button class="left_out">左侧出</button>
+<button class="right_out">右测出</button>
+    <button class="sort">排序</button>
+</div>
+<div class="bottom">
+
+
+</div>
+
+</body>
+</html>

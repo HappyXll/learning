@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百度excel4</title>
+    <style type="text/css">
+        button{
+            background: transparent;
+            border-radius: 3px;
+            border: none;
+            border: 1px solid gray;
+        }
+        .right_in{
+
+          margin-right: 20px;
+        }
+        .bot{
+            font-size: 17px;
+            margin-top: 10px;
+            width: auto;
+            padding: 10px;
+            height: 10px;
+            text-align: center;
+            color: white;
+            background: red;
+            line-height: 10px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+    </style>
+    <script >
+        window.onload=function () {
+
+            var text_in=document.getElementsByClassName("in_text")[0];
+            var bt=document.getElementsByClassName("bottom")[0];
+            var left_in=document.getElementsByClassName("left_in")[0];
+            var right_in=document.getElementsByClassName("right_in")[0];
+            var left_out=document.getElementsByClassName("left_out")[0];
+            var right_out=document.getElementsByClassName("right_out")[0];
+
+            text_in.onblur=function () {
+                if(text_in.value=="")
+                text_in.value="请输入值";
+            }
+            text_in.onfocus=function () {
+                text_in.value="";
+            }
+             function createNod() {
+                 var div=document.createElement("div");
+                 div.innerHTML=text_in.value;
+                 div.className="bot";
+                 return div;
+             }
+            left_in.onclick=function ( ) {
+                bt.insertBefore( createNod(), bt.firstChild);
+            }
+            right_in.onclick=function () {
+                bt.appendChild(createNod());
+            }
+            right_out.onclick=function () {
+                var last_child=bt.lastElementChild;
+                if(last_child){
+                bt.removeChild(last_child);
+            }
+            else{
+                return;}
+            }
+            left_out.onclick=function () {
+                var first_child=bt.firstChild;
+                if(first_child){
+                    bt.removeChild(first_child);
+                }
+                else{
+                    return;
+                }
+            }
+            bt.onclick=function (event) {
+                var ev=event || window.event;
+               alert("确认要删除"+ev.target.innerHTML+"吗");
+                bt.removeChild(ev.target);
+            }
+
+        }
+    </script>
+</head>
+<body>
+<div class="top">
+    <!--autofocus当页面加载时获得焦点：-->
+<input type="text" class="in_text"  autofocus="autofocus"/>
+
+<button class="left_in">左侧入</button>
+<button class="right_in">右测入</button>
+<button class="left_out">左侧出</button>
+<button class="right_out">右测出</button>
+</div>
+<div class="bottom">
+
+<div class="bot">11111111111111</div>
+<div class="bot">4</div></div>
+
+</body>
+</html>
