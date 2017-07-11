@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 100px;
+            height:100px;
+            border: 1px solid antiquewhite;
+        }
+        .box2{
+           width:300px;
+            height:300px;
+            background: red;
+            margin: 0 auto;
+            position: absolute;
+            top: 900px;
+
+        }
+        .img1{width:400px ;
+            height: 400px ;
+            margin:  10px auto;
+            display: block;
+
+        }
+    </style>
+
+</head>
+<body>
+<img  class="img1"   data-src="image/npm2.PNG">
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" " data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" " data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" " data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" " data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" " data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" " data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" " data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<img  class="img1" src=" "  data-src="image/npm2.PNG" >
+<script>
+    var imges=document.querySelectorAll(".img1");
+    function lazyout() {
+        var h=window.innerHeight;
+        var st=document.body.scrollTop;
+        [].forEach.call(imges,function (image) {
+            if(!image.getAttribute('data-src')){return}
+            if(h+st>image.offsetTop){
+                  image.src=image.getAttribute("data-src");
+                image.removeAttribute("data-src");
+
+            }
+        });
+    }
+    window.addEventListener("load",lazyout,false);
+    window.addEventListener("scroll",lazyout,false);
+
+</script>
+</body>
+
+</html>
